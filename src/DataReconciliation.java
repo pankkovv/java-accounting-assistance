@@ -4,6 +4,8 @@ import java.util.HashMap;
 public class DataReconciliation {
 
     HashMap<String, Double> profitMonth = new HashMap<>();
+    ArrayList<String> errorMonth = new ArrayList<>();
+
     ReadFile readFile = new ReadFile();
     YearlyReport yearlyReport = new YearlyReport();
 
@@ -14,6 +16,10 @@ public class DataReconciliation {
         double profit = 0.0;
         Double profitMax;
         Double profitMin;
+        String result = "";
+
+        readFile.readFileMonthOrNull(path);
+        yearlyReport.processingYear(path);
 
         HashMap<Integer, String> months = readFile.months;
 
@@ -55,12 +61,17 @@ public class DataReconciliation {
             double valueProfitYear = year.get(category);
 
             if(valueProfitMonth != valueProfitYear){
-                String resultMinus = "В месяце " + "\"" + category + "\"" + " обнаружено несоответствие." + "\n";
-                return resultMinus;
+                errorMonth.add(category);
             }
         }
-        String resultPlus = "Ошибок не обнаружено, операция успешно завершена." + "\n";
-        return resultPlus;
+
+        if(errorMonth.size() != 0){
+            result = "В месяцах "  + errorMonth.toString() + " обнаружено несоответствие." + "\n";
+        }else{
+            result = "Ошибок не обнаружено, операция успешно завершена." + "\n";
+        }
+
+        return result;
 
     }
 }
