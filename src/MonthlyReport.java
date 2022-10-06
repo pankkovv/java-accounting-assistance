@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class MonthlyReport {
-    HashMap<String, Integer> calculationMonth = new HashMap<>();
+    Map<String, Integer> calculationMonth = new HashMap<>();
     HashMap<String, Integer> reportMonthYan = new HashMap<>();
     HashMap<String, Integer> reportMonthFeb = new HashMap<>();
     HashMap<String, Integer> reportMonthMarch = new HashMap<>();
